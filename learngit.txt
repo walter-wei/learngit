@@ -1,0 +1,117 @@
+
+
+http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013752340242354807e192f02a44359908df8a5643103a000
+
+https://github.com/settings/keys
+
+
+create a new repository on the command line：
+
+echo "# learngit" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+
+下一步提交时可以选择https还是ssh方式。下面是HTTPS的：
+git remote add origin https://github.com/walter-wei/learngit.git
+下面是SSH的
+git remote add origin git@github.com:walter-wei/learngit.git
+如果选择了一种，要切换到另外一种或者仓库切换，需要先使用如下命令清除后，再执行一次。
+git remote remove origin
+
+git push -u origin master    ---第一次这么用，后续直接使用 
+git push origin master
+
+
+push an existing repository from the command line:
+
+git remote add origin https://github.com/walter-wei/learngit.git
+git push -u origin master
+
+克隆远程库到本地：
+git clone git@github.com:walter-wei/gitskills.git
+
+Git可以删除掉master分支,然后把现在在用的dev分支设置为master：
+
+    git checkout dev
+
+    git merge master
+
+    git brach -d master
+
+    git branch -m dev master
+
+    git push -f origin master
+
+Git鼓励大量使用分支：
+
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+强制删除分支：git branch -D feature-vulcan
+
+查看分支合并情况：
+ git log --graph --pretty=oneline --abbrev-commit
+准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward：
+ git merge --no-ff -m "merge with no-ff" dev
+ 
+ Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
+ git stash
+查看：
+git stash list
+恢复：
+1、用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+2、用git stash pop，恢复的同时把stash内容也删了
+
+还可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+$ git stash apply stash@{0}
+
+多人协作的工作模式通常是这样：
+
+1.  首先，可以试图用git push origin branch-name推送自己的修改；
+
+2.  如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+3.  如果合并有冲突，则解决冲突，并在本地提交；
+
+4.  没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
+
+如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令
+git branch --set-upstream branch-name origin/branch-name。
+
+查看远程库信息，使用
+git remote -v
+
+ 创建远程origin的dev分支到本地，这个命令创建本地dev分支:
+ git checkout -b dev origin/dev
+ 
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id
+git tag -a <tagname> -m "blablabla..."可以指定标签信息
+git tag -s <tagname> -m "blablabla..."可以用PGP签名标签
+命令git tag可以查看所有标签
+ 
+ 命令git push origin <tagname>可以推送一个本地标签
+ 命令git push origin --tags可以推送全部未推送过的本地标签	
+ 命令git tag -d <tagname>可以删除一个本地标签
+ 命令git push origin :refs/tags/<tagname>可以删除一个远程标签
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
